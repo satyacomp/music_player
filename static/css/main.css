@@ -1,0 +1,16 @@
+      caption {
+        background: #1c87c9;
+        color: #fff;
+        caption-side: top;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid #1c87c9;
+        padding: 3px;
+      }
+      td {
+        background-color: #cccccc;
+        color: #333333;
+        text-align:center;
+      }

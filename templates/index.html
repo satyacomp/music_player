@@ -1,0 +1,65 @@
+ <!-- using jinja inheritance --> 
+{% extends 'base.html' %}
+
+{% block head %}
+		
+{% endblock %}
+
+{% block body %}
+	
+<div class='input'>
+	<form action="/" method="POST" enctype="multipart/form-data">
+	<center>
+	<table name="tblUpload" border=1>
+		<caption color=red><h3>UPLOAD A SONG</h3></caption>
+	<tr><th>Title</th><th>Artist</th><th>Album</th><th>Upload File</th></tr>
+	<tr><td><input type=text name="txtTitle"></td><td><input type=text name="txtArtist"></td><td><input type=text name="txtAlbum"></td>
+		<td><input type=File name="txtFile" accept=".mp3"></td></tr>
+	<tr><td colspan=4 align=center><input type=submit value="Upload Song"></td></tr>
+	</table>
+	</center>
+	</form>
+</div>
+
+<div class='content'>
+	<center>
+	<table name="tblsongs" border=1>
+		<caption><h3>Play List</h3></caption>
+	<tr><form action="/search_file" method="POST">
+		<td>Search by: <select id="lstSearch" name="lstSearch">
+		<option value="none">None</option>
+		<option value="title">Title</option>
+		<option value="artist">Artist</option>
+		<option value="album">Album</option>
+		</select></td>
+	<td colspan=3><input type=text size='50' name='txtSearch'></td>
+	<td><input type=submit value='Search' name='btnSearch' size=10></form></td></form>
+	</tr>	
+	<tr>
+		<th>Title</th>
+		<th>Artist</th>
+		<th>Album</th>
+		<th>Play Music</th>
+		<th>Actions</th>
+	</tr>
+	{% for song in songs %}
+	<tr>
+		<td>{{ song.title }}</td>
+		<td>{{ song.artist }}</td>
+		<td>{{ song.album }}</td>
+		<td><audio controls>
+			<source src="/download/{{ song.url }}" type="audio/mp3" />
+			</audio>
+		</td>
+		<td><a href="/download/{{ song.url }}">Download</a><br>
+			<a href="/delete/{{ song.song_id }}">Delete</a><br>
+			<a href="/shareURL/{{ song.url }}">Unique URL</a><br>
+		</td>
+	</tr>
+	{% endfor %}
+	</table>
+	</center>
+</div>
+
+{% endblock %}
+
